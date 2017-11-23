@@ -1,4 +1,8 @@
+import datetime
+from django.shortcuts import render,get_object_or_404
 from django.db import models
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.utils import timezone
 
 class Question(models.Model):
@@ -12,6 +16,7 @@ class Question(models.Model):
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
+
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)

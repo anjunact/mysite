@@ -25,7 +25,7 @@ SECRET_KEY = '4_3icwab28fck_b4wssb^*g0gt3t(jz8y_34n7&gygr6wpjtc7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'main',
+    'm2m',
 ]
 
 MIDDLEWARE = [
@@ -85,8 +87,11 @@ DATABASES = {
         'NAME': 'mysite',
         'USER': 'root',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.11.1',
         'PORT': '3306',
+        'OPTIONS':{
+            'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
+        },
     }
 }
 
@@ -128,3 +133,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SITE_ID=1
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+)
